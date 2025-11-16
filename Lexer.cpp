@@ -10,8 +10,6 @@ enum class State {
     SPACES_Q1
 };
 
-enum class Keys { INT, IF, ELSE, WHILE, PRINT};
-
 Token Lexer::nextToken() {
     text.clear();
     State state = State::Q0;
@@ -61,7 +59,19 @@ Token Lexer::nextToken() {
                         currentChar = in.get();
                         state = State::IDENTIFIER_Q3;
                 }else {
-                    return Token::IDENTIFIER;
+                    if( text == "int") {
+                        return Token::INT_KEYWORD;
+                    } else if (text == "if") {
+                        return Token::IF_KEYWORD;
+                    } else if (text == "else") {
+                        return Token::ELSE_KEYWORD;
+                    } else if (text == "while") {
+                        return Token::WHILE_KEYWORD;
+                    } else if (text == "print") {
+                        return Token::PRINT_KEYWORD;
+                    }else{
+                        return Token::IDENTIFIER;
+                    }
                 }
                 break;
 
@@ -76,7 +86,19 @@ Token Lexer::nextToken() {
                         currentChar = in.get();
                         state = State::IDENTIFIER_Q3;
                 }else {
-                    return Token::IDENTIFIER;
+                    if( text == "int") {
+                        return Token::INT_KEYWORD;
+                    } else if (text == "if") {
+                        return Token::IF_KEYWORD;
+                    } else if (text == "else") {
+                        return Token::ELSE_KEYWORD;
+                    } else if (text == "while") {
+                        return Token::WHILE_KEYWORD;
+                    } else if (text == "print") {
+                        return Token::PRINT_KEYWORD;
+                    }else{
+                        return Token::IDENTIFIER;
+                    }
                 }
                 break;
             
@@ -91,7 +113,19 @@ Token Lexer::nextToken() {
                         currentChar = in.get();
                         state = State::IDENTIFIER_Q3;
                 }else {
-                    return Token::IDENTIFIER;
+                    if( text == "int") {
+                        return Token::INT_KEYWORD;
+                    } else if (text == "if") {
+                        return Token::IF_KEYWORD;
+                    } else if (text == "else") {
+                        return Token::ELSE_KEYWORD;
+                    } else if (text == "while") {
+                        return Token::WHILE_KEYWORD;
+                    } else if (text == "print") {
+                        return Token::PRINT_KEYWORD;
+                    }else{
+                        return Token::IDENTIFIER;
+                    }
                 }
                 break;
             

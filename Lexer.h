@@ -4,7 +4,22 @@
 enum class Token{
     IDENTIFIER, 
     NUMBER,
-    END_OF_FILE
+    END_OF_FILE,
+    PLUS,
+    MINUS,
+    MULTIPLY,
+    DIVIDE,
+    ASSIGN,
+    SEMICOLON,
+    LEFT_PAREN,
+    RIGHT_PAREN,
+    LEFT_BRACE,
+    RIGHT_BRACE,
+    INT_KEYWORD,
+    IF_KEYWORD,
+    ELSE_KEYWORD,
+    WHILE_KEYWORD,
+    PRINT_KEYWORD
 };
 
 class Lexer {
