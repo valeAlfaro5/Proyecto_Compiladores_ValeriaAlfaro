@@ -31,8 +31,7 @@ enum class Token{
     GREATER_EQUAL,//>=
     LOGIC_AND,//&&
     LOGIC_OR, //||
-    NOT_LOGIC,//!
-    OTHER//por si no cumple los logic u otros
+    NOT_LOGIC,//! 
 };
 
 class Lexer {

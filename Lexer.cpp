@@ -331,7 +331,7 @@ Token Lexer::nextToken() {
                     currentChar = in.get();
                     return Token::LOGIC_AND;
                 }else{
-                    return Token::OTHER;
+                    throw std::runtime_error(std::string("Invalid character '") + static_cast<char>('&') + std::string("'"));
                 }
                 break;
             
@@ -341,7 +341,7 @@ Token Lexer::nextToken() {
                     currentChar = in.get();
                     return Token::LOGIC_OR;
                 }else{
-                    return Token::OTHER;
+                    throw std::runtime_error(std::string("Invalid character '") + static_cast<char>('|') + std::string("'"));
                 }
 
             
@@ -374,8 +374,6 @@ const char* Lexer::tokenToString(Token token)
         return "ELSE";
     case Token::EQUAL_TO:
         return "EQUAL TO";
-    case Token::OTHER:
-        return "OTHER";
     case Token::GREATER_EQUAL:
         return "GREATHER THAN OR EQUAL TO";
     case Token::GREATER_THAN:

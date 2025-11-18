@@ -4,7 +4,7 @@ int main() {
     int suma = entero + 10 - 5 * 2 / 4 % 3;
     
     while (entero == 10) {
-        entero&&;
+        entero;&
     }
     
     int if >= 0;      //sin sentido logico
