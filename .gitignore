@@ -34,7 +34,15 @@ bld/
 [Ll]og/
 [Ll]ogs/
 .vscode/
-.build/
+
+#build folder
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+.DS_Store
 
 # Build results on 'Bin' directories
 **/[Bb]in/*

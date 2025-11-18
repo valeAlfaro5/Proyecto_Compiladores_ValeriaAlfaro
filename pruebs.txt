@@ -1,0 +1,16 @@
+// solo prueba de tokens
+int main() {
+    int entero = 42;
+    int suma = entero + 10 - 5 * 2 / 4 % 3;
+    
+    while (entero == 10) {
+        entero&&;
+    }
+    
+    int if >= 0;      //sin sentido logico
+    int ifelse != -1;   // identificador 
+    int _variable123 = 123;
+    
+    print 0;
+    
+}
