@@ -1,18 +1,8 @@
-// solo prueba de tokens
-int main() {
-    int entero = 42;
-    int suma = entero + 10 - 5 * 2 / 4 % 3;
-    
-    while (entero == 10) {
-        entero;
-    }
-
-    c--5
-    
-    int if >= 0;      //sin sentido logico
-    int ifelse != -1;   // identificador 
-    int _variable123 = 123;
-    
-    print 0;
-    
-}
+/* Este es un comentario
+de bloque que debe ser
+ignorado por el lexer */
+int x = 10;
+/* Comentario con un * asterisco adentro */
+print([variable con espacios]);
+print([mi-variable-custom]);
+1

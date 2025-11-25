@@ -15,7 +15,8 @@ enum class State {
     LOGIC_AND_Q1,
     LOGIC_OR_Q1,
     COMMENT_Q1,
-    MINUS_Q1
+    MINUS_Q1, 
+    BRACKETS_Q1
 };
 
 Token Lexer::nextToken() {
@@ -149,8 +150,10 @@ Token Lexer::nextToken() {
                     text += static_cast<char>(currentChar);
                     currentChar = in.get();
                     state = State::LOGIC_OR_Q1;
-                }
-                else{
+                }else if (currentChar == '['){
+		     text += static_cast<char>(currentChar);
+		     state = State::BRACKETS_Q1;
+                }else{
                     throw std::runtime_error(std::string("Invalid character '") + static_cast<char>(currentChar) + std::string("'"));
                 }
                 break;
@@ -319,8 +322,20 @@ Token Lexer::nextToken() {
                         currentChar = in.get();
                     }
 
-                    return Token::COMMENT;
-                }else{
+                    //return Token::COMMENT;
+                }else if (currentChar == '*'){
+			//no se consume nada porque se ignora
+                    while (currentChar != '/' && currentChar != EOF) {
+                        currentChar = in.get();
+                    }
+
+                    if (currentChar == '\n') {
+                        currentChar = in.get();
+                    }
+
+		}
+
+		else{
                     return Token::DIVIDE;
                 }
                 break;
@@ -343,6 +358,31 @@ Token Lexer::nextToken() {
                 }else{
                     throw std::runtime_error(std::string("Invalid character '") + static_cast<char>('|') + std::string("'"));
                 }
+		break;
+ 	    
+	     case State::BRACKETS_Q1:
+		if(currentChar == '['){
+		    currentChar= in.get();
+			
+                    while(currentChar != ']' || currentChar != EOF){
+
+			text += static_cast<char>(currentChar);
+			currentChar = in.get();
+		
+			}
+throw std::runtime_error(std::string("Probando que entra al if"));
+		    
+  	    	    if (currentChar == ']') {
+	                text += static_cast<char>(currentChar);
+
+                        currentChar = in.get();
+                    }
+
+                    return Token::BRACKET_IDENT;
+                }else{
+                    throw std::runtime_error(std::string("Invalid character '") + static_cast<char>('[') + std::string("'"));
+                }
+                break;
 
             
             case State::END_OF_FILE_Q1:

@@ -73,7 +73,7 @@ class Lexer : public reflex::AbstractLexer<reflex::Matcher> {
 
 int Lexer::lex(void)
 {
-  static const char *REGEX_INITIAL = "(?m)(-?[0-9]+)|([A-Z_a-z][0-9A-Z_a-z]*)|((?:\\Q//\\E).*)|((?:\\Q+\\E))|((?:\\Q-\\E))|((?:\\Q*\\E))|((?:\\Q/\\E))|((?:\\Q%\\E))|((?:\\Q==\\E))|((?:\\Q=\\E))|((?:\\Q!=\\E))|((?:\\Q<\\E))|((?:\\Q>\\E))|((?:\\Q<=\\E))|((?:\\Q>=\\E))|((?:\\Q&&\\E))|((?:\\Q||\\E))|((?:\\Q!\\E))|((?:\\Q;\\E))|((?:\\Q,\\E))|((?:\\Q(\\E))|((?:\\Q)\\E))|((?:\\Q{\\E))|((?:\\Q}\\E))";
+  static const char *REGEX_INITIAL = "(?m)(-?[0-9]+)|([A-Z_a-z][0-9A-Z_a-z]*)|([\\x09\\x0a\\x0d\\x20]+)|((?:\\Q//\\E).*)|((?:\\Q/*\\E))|(\\[.*\\])|((?:\\Q+\\E))|((?:\\Q-\\E))|((?:\\Q*\\E))|((?:\\Q/\\E))|((?:\\Q%\\E))|((?:\\Q==\\E))|((?:\\Q=\\E))|((?:\\Q!=\\E))|((?:\\Q<\\E))|((?:\\Q>\\E))|((?:\\Q<=\\E))|((?:\\Q>=\\E))|((?:\\Q&&\\E))|((?:\\Q||\\E))|((?:\\Q!\\E))|((?:\\Q;\\E))|((?:\\Q,\\E))|((?:\\Q(\\E))|((?:\\Q)\\E))|((?:\\Q{\\E))|((?:\\Q}\\E))";
   static const reflex::Pattern PATTERN_INITIAL(REGEX_INITIAL);
   if (!has_matcher())
   {
@@ -99,71 +99,80 @@ int Lexer::lex(void)
           case 2: // rule automata.l:3: [a-zA-Z_][a-zA-Z_0-9]* :
 #line 3 "automata.l"
             break;
-          case 3: // rule automata.l:4: "//".* :
+          case 3: // rule automata.l:4: [\t\r\n ]+ :
 #line 4 "automata.l"
             break;
-          case 4: // rule automata.l:5: "+" :
+          case 4: // rule automata.l:5: "//".* :
 #line 5 "automata.l"
             break;
-          case 5: // rule automata.l:6: "-" :
+          case 5: // rule automata.l:6: "/*" :
 #line 6 "automata.l"
             break;
-          case 6: // rule automata.l:7: "*" :
+          case 6: // rule automata.l:7: \[.*\] :
 #line 7 "automata.l"
             break;
-          case 7: // rule automata.l:8: "/" :
+          case 7: // rule automata.l:8: "+" :
 #line 8 "automata.l"
             break;
-          case 8: // rule automata.l:9: "%" :
+          case 8: // rule automata.l:9: "-" :
 #line 9 "automata.l"
             break;
-          case 9: // rule automata.l:10: "==" :
+          case 9: // rule automata.l:10: "*" :
 #line 10 "automata.l"
             break;
-          case 10: // rule automata.l:11: "=" :
+          case 10: // rule automata.l:11: "/" :
 #line 11 "automata.l"
             break;
-          case 11: // rule automata.l:12: "!=" :
+          case 11: // rule automata.l:12: "%" :
 #line 12 "automata.l"
             break;
-          case 12: // rule automata.l:13: "<" :
+          case 12: // rule automata.l:13: "==" :
 #line 13 "automata.l"
             break;
-          case 13: // rule automata.l:14: ">" :
+          case 13: // rule automata.l:14: "=" :
 #line 14 "automata.l"
             break;
-          case 14: // rule automata.l:15: "<=" :
+          case 14: // rule automata.l:15: "!=" :
 #line 15 "automata.l"
             break;
-          case 15: // rule automata.l:16: ">=" :
+          case 15: // rule automata.l:16: "<" :
 #line 16 "automata.l"
             break;
-          case 16: // rule automata.l:17: "&&" :
+          case 16: // rule automata.l:17: ">" :
 #line 17 "automata.l"
             break;
-          case 17: // rule automata.l:18: "||" :
+          case 17: // rule automata.l:18: "<=" :
 #line 18 "automata.l"
             break;
-          case 18: // rule automata.l:19: "!" :
+          case 18: // rule automata.l:19: ">=" :
 #line 19 "automata.l"
             break;
-          case 19: // rule automata.l:20: ";" :
+          case 19: // rule automata.l:20: "&&" :
 #line 20 "automata.l"
             break;
-          case 20: // rule automata.l:21: "," :
+          case 20: // rule automata.l:21: "||" :
 #line 21 "automata.l"
             break;
-          case 21: // rule automata.l:22: "(" :
+          case 21: // rule automata.l:22: "!" :
 #line 22 "automata.l"
             break;
-          case 22: // rule automata.l:23: ")" :
+          case 22: // rule automata.l:23: ";" :
 #line 23 "automata.l"
             break;
-          case 23: // rule automata.l:24: "{" :
+          case 23: // rule automata.l:24: "," :
 #line 24 "automata.l"
             break;
-          case 24: // rule automata.l:25: "}" :
+          case 24: // rule automata.l:25: "(" :
 #line 25 "automata.l"
+            break;
+          case 25: // rule automata.l:26: ")" :
+#line 26 "automata.l"
+            break;
+          case 26: // rule automata.l:27: "{" :
+#line 27 "automata.l"
+            break;
+          case 27: // rule automata.l:28: "}" :
+#line 28 "automata.l"
             break;
         }
   }

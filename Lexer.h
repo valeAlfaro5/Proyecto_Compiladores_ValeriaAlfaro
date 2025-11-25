@@ -31,7 +31,10 @@ enum class Token{
     GREATER_EQUAL,//>=
     LOGIC_AND,//&&
     LOGIC_OR, //||
-    NOT_LOGIC,//! 
+    NOT_LOGIC,//!
+    BRACKET_IDENT,//[]
+    COMMENT_MULTILINE// /*
+
 };
 
 class Lexer {
