@@ -8,6 +8,4 @@ add_executable(Proyecto_Compiladores_ValeriaAlfaro
     main.cpp
     Lexer.cpp
     Lexer.h
-    Parser.h
-    Parser.cpp
 )

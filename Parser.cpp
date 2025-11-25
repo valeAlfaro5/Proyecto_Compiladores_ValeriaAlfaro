@@ -1,12 +1,15 @@
 #include "Parser.h"
-#include <iostream>
 
 void Parser::program() {
-    while(token != Token::END_OF_FILE) {
-        statement();
-        std::cout<<lexer.getLineNumber()<< "\n";
-        // std::cout<<"Parsed a statement successfully.\n";
-    }  
+
+    try{
+        while(token != Token::END_OF_FILE) {
+            statement();
+        }
+        
+    }catch(...){
+        throw std::runtime_error("Line x: Invalid input found after expression.");
+    }
 }
 
 
@@ -25,7 +28,7 @@ void Parser::statement(){
     }else if (token == Token::LEFT_BRACE){
         block();
     }else{
-         throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Statement."));
+        throw std::runtime_error("Line x: Expected a statement.");
     }
 
 }
@@ -45,13 +48,13 @@ void Parser::varDecl(){
             if (token == Token::SEMICOLON){
                 token = lexer.nextToken();
             }else{
-                 throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Semicolon."));
+                throw std::runtime_error("Line x: Expected a Semicolon.");
             }
         }else{
-            throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected an Identifier."));
+            throw std::runtime_error("Line x: Expected an Identifier");
         }
     }else{
-        throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected an Int Keyword."));
+        throw std::runtime_error("Line x: Expected an Int Keyword");
     }
 }
 
@@ -66,13 +69,13 @@ void Parser::assignment(){
             if(token == Token::SEMICOLON){
                 token = lexer.nextToken();
             }else{
-               throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Semicolon."));
+                throw std::runtime_error("Line x: Expected a Semicolon");
             }
         }else{
-            throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected an Equal Sign."));
+            throw std::runtime_error("Line x: Expected an Equal Sign");
         }
     }else{
-        throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected an Identifier."));
+        throw std::runtime_error("Line x: Expected an Identifier");
     }
 }
 
@@ -94,13 +97,13 @@ void Parser::ifStmt(){
                 }//no tira error porque es opcional
 
             }else{
-                throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Right Parenthesis."));
+                throw std::runtime_error("Line x: Expected a Right Parenthesis");
             }
         }else{
-            throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Left Parenthesis."));
+            throw std::runtime_error("Line x: Expected a Left Parenthesis");
         }
     }else{
-       throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected an If Keyword."));
+        throw std::runtime_error("Line x: Expected an IF Keyword");
     }
 
 }
@@ -117,13 +120,13 @@ void Parser::whileStmt(){
                 statement();
 
             }else{
-                 throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Right Parenthesis."));
+                 throw std::runtime_error("Line x: Expected a Right Parenthesis");
             }
         }else{
-            throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Left Parenthesis."));
+             throw std::runtime_error("Line x: Expected a Left Parenthesis");
         }
     }else{
-         throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a While Keyword."));
+         throw std::runtime_error("Line x: Expected a While Keyword");
     }
 }
 
@@ -140,16 +143,16 @@ void Parser::printStmt(){
                 if(token == Token::SEMICOLON){
                     token = lexer.nextToken();
                 }else{
-                     throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Semicolon."));
+                     throw std::runtime_error("Line x: Expected a Semicolon");
                 }
             }else{
-                throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Right Parenthesis."));
+                 throw std::runtime_error("Line x: Expected a Right Parenthesis");
             }
         }else{
-             throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Left Parenthesis."));
+             throw std::runtime_error("Line x: Expected a Left Parenthesis");
         }
     }else{
-        throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Print Keyword."));
+         throw std::runtime_error("Line x: Expected a Print Keyword");
     }
 
 }
@@ -162,15 +165,17 @@ void Parser::block(){
             statement();
         }
 
-        if (token == Token::RIGHT_BRACE) {
-            token = lexer.nextToken();
-        } else { // token == Token::END_OF_FILE
-            throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Right Bracket."));
+        if (token == Token::END_OF_FILE) {
+            throw std::runtime_error("Line x: Unexpected end of file. Expected '}'.");
         }
+
+        token = lexer.nextToken();
+        
     }else{
-        throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Left Bracket."));
+        throw std::runtime_error("Line x: Expected a Left Bracket");
     }
-    }
+
+}
 
 void Parser::expression(){
     logicalOr();
@@ -259,10 +264,11 @@ void Parser::primary(){
         if(token == Token::RIGHT_PAREN){
             token= lexer.nextToken();
         }else{
-            throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Right Parenthesis."));
+            throw std::runtime_error("Linea x: Expected a Right Parenthesis. " );
         }
     }else{
-        throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Left Parenthesis, Number or Identifier."));
+        throw std::runtime_error("Linea x: Expected Left Parenthesis, Number or Identifier." );
+    }
 
 }
-}
+
