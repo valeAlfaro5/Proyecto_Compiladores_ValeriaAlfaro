@@ -43,8 +43,11 @@ public:
     Token nextToken();
 
     static const char* tokenToString(Token t);
+
+    int getLineNumber() const { return lineNumber; }
 private:
     std::istream &in;
     char currentChar;
     std::string text;
+    int lineNumber = 0;
 };
