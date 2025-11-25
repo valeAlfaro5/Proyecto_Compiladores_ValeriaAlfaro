@@ -107,6 +107,7 @@ int Lexer::lex(void)
             break;
           case 5: // rule automata.l:6: "/*" :
 #line 6 "automata.l"
+"*/"
             break;
           case 6: // rule automata.l:7: \[.*\] :
 #line 7 "automata.l"

@@ -370,7 +370,6 @@ Token Lexer::nextToken() {
 			currentChar = in.get();
 		
 			}
-throw std::runtime_error(std::string("Probando que entra al if"));
 		    
   	    	    if (currentChar == ']') {
 	                text += static_cast<char>(currentChar);
