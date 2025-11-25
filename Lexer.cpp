@@ -25,7 +25,7 @@ Token Lexer::nextToken() {
     while (true) {
         switch (state) {
             case State::Q0:
-
+                
                 //que no termine el archivo
                 if (currentChar == EOF){
                     state = State::END_OF_FILE_Q1;
@@ -45,7 +45,10 @@ Token Lexer::nextToken() {
 
                 //espacios, tabulaciones, saltos de linea y retornos de carro
                 }else if ( currentChar == ' ' || currentChar == '\n' || currentChar =='\t' || currentChar == '\r'){
-                    currentChar = in.get();
+                    if (currentChar == '\n') {
+                            lineNumber++;
+                    }
+                    currentChar = in.get();  
                     state = State::SPACES_Q1;
                 
                     //suma
@@ -244,6 +247,9 @@ Token Lexer::nextToken() {
             
             case State::SPACES_Q1:
                 if ( currentChar == ' ' || currentChar == '\n' || currentChar =='\t' || currentChar == '\r'){
+                    if (currentChar == '\n') {
+                        lineNumber++;
+                    }
                     currentChar = in.get();
                     state = State::SPACES_Q1;
                 }else {
@@ -316,6 +322,7 @@ Token Lexer::nextToken() {
                     }
 
                     if (currentChar == '\n') {
+                        lineNumber++;
                         currentChar = in.get();
                     }
 

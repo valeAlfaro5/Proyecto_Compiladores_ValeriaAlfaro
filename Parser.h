@@ -1,12 +1,16 @@
 #include "Lexer.h"
 
 class Parser {
-    friend class Lexer;
 
     public:
-        Parser();
-
+        Parser(Lexer &lexer_) : lexer(lexer_) {
+            token = lexer.nextToken();
+        }
         void program();
+        
+    private:
+        Lexer lexer;
+        Token token;
         void statement();
         void varDecl();
         void assignment();
@@ -23,8 +27,4 @@ class Parser {
         void factor();
         void unary();
         void primary();
-
-    private:
-        Lexer lexer;
-        Token token;
-}
+};
