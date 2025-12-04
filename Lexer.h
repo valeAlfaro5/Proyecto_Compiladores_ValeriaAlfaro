@@ -4,6 +4,8 @@
 enum class Token{
     IDENTIFIER, 
     NUMBER,
+    FLOAT,
+    POINT,
     END_OF_FILE,
     COMMENT,
     PLUS,//+
@@ -17,11 +19,21 @@ enum class Token{
     RIGHT_PAREN,//)
     LEFT_BRACE,//{
     RIGHT_BRACE,//}
+    LEFT_SQBK, //[
+    RIGHT_SQBK,//]
     INT_KEYWORD,//'int'
+    BOOL_KEYWORD,//'bool'
+    FLOAT_KEYWORD,//'float
+    RETURN_KEYWORD,
     IF_KEYWORD,//'if'
     ELSE_KEYWORD,//'else'
     WHILE_KEYWORD,//'while'
     PRINT_KEYWORD,//'print'
+    BREAK_KEYWORD,//'break'
+    CONTINUE_KEYWORD, //'continue'
+    INPUT_KEYWORD,//'input'
+    TWO_POINTS,//:
+    QUESTION_MARK,//?
     MODULE,//%
     EQUAL_TO,//==
     NOT_EQUAL_TO,//!=

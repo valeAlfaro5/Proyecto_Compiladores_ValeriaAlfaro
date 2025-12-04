@@ -11,7 +11,7 @@ void Parser::program() {
 
 void Parser::statement(){
 
-    if(token == Token::INT_KEYWORD){
+    if(token == Token::INT_KEYWORD || token == Token::BOOL_KEYWORD || token == Token::FLOAT_KEYWORD  ){
         varDecl();
     }else if (token == Token::IDENTIFIER){
         assignment();
@@ -30,11 +30,27 @@ void Parser::statement(){
 }
 
 void Parser::varDecl(){
-    if(token == Token::INT_KEYWORD){
+    if(token == Token::INT_KEYWORD || token == Token::BOOL_KEYWORD || token == Token::FLOAT_KEYWORD){
         token = lexer.nextToken();
 
         if (token == Token::IDENTIFIER){
             token = lexer.nextToken();
+
+            if(token == Token::LEFT_SQBK){
+                token = lexer.nextToken();
+                //se debe validar que sea numero en semantico
+                if(token == Token::NUMBER){
+                    token = lexer.nextToken();
+
+                    if(token == Token::RIGHT_SQBK){
+                        token = lexer.nextToken();
+                    }else{
+                         throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Right Sqaure Bracket."));
+                    }
+                }else{
+                     throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Number."));
+                }
+            }
 
             if(token == Token::ASSIGN){
                 token = lexer.nextToken();
@@ -169,7 +185,11 @@ void Parser::block(){
     }else{
         throw std::runtime_error(std::string("Line ") + std::to_string(lexer.getLineNumber()) + std::string(": Expected a Left Bracket."));
     }
-    }
+}
+
+void Parser::ternary(){
+    
+}
 
 void Parser::expression(){
     logicalOr();

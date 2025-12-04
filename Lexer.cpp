@@ -152,7 +152,32 @@ Token Lexer::nextToken() {
                     text += static_cast<char>(currentChar);
                     currentChar = in.get();
                     state = State::LOGIC_OR_Q1;
+                
+                    //square bracket left
+                }else if(currentChar =='['){
+                    text+= static_cast<char>(currentChar);
+                    currentChar = in.get();
+                    return Token::LEFT_SQBK;
+                
+                    //square bracket right
+                }else if(currentChar ==']'){
+                    text+= static_cast<char>(currentChar);
+                    currentChar = in.get();
+                    return Token::RIGHT_SQBK;
+                
+                    //question mark
+                }else if(currentChar =='?'){
+                    text+= static_cast<char>(currentChar);
+                    currentChar = in.get();
+                    return Token::QUESTION_MARK;
+                
+                    //two points
+                }else if(currentChar ==':'){
+                    text+= static_cast<char>(currentChar);
+                    currentChar = in.get();
+                    return Token::TWO_POINTS;
                 }
+
                 else{
                     throw std::runtime_error(std::string("Invalid character '") + static_cast<char>(currentChar) + std::string("'"));
                 }
@@ -212,6 +237,18 @@ Token Lexer::nextToken() {
                         return Token::WHILE_KEYWORD;
                     } else if (text == "print") {
                         return Token::PRINT_KEYWORD;
+                    } else if (text == "bool") {
+                        return Token::BOOL_KEYWORD;
+                    } else if (text == "float") {
+                        return Token::FLOAT_KEYWORD;
+                    } else if (text == "continue") {
+                        return Token::CONTINUE_KEYWORD;
+                    } else if (text == "break") {
+                        return Token::BREAK_KEYWORD;
+                    } else if (text == "input") {
+                        return Token::INPUT_KEYWORD;
+                    }else if (text == "return") {
+                        return Token::RETURN_KEYWORD;
                     }else{
                         return Token::IDENTIFIER;
                     }
@@ -239,6 +276,18 @@ Token Lexer::nextToken() {
                         return Token::WHILE_KEYWORD;
                     } else if (text == "print") {
                         return Token::PRINT_KEYWORD;
+                    } else if (text == "bool") {
+                        return Token::BOOL_KEYWORD;
+                    } else if (text == "float") {
+                        return Token::FLOAT_KEYWORD;
+                    } else if (text == "continue") {
+                        return Token::CONTINUE_KEYWORD;
+                    } else if (text == "break") {
+                        return Token::BREAK_KEYWORD;
+                    } else if (text == "input") {
+                        return Token::INPUT_KEYWORD;
+                    }else if (text == "return") {
+                        return Token::RETURN_KEYWORD;
                     }else{
                         return Token::IDENTIFIER;
                     }
@@ -423,6 +472,24 @@ const char* Lexer::tokenToString(Token token)
         return "SEMICOLON";
     case Token::WHILE_KEYWORD:
         return "WHILE";
+    case Token::INPUT_KEYWORD:
+        return "INPUT";
+    case Token::BOOL_KEYWORD:
+        return "BOOL";
+    case Token::FLOAT_KEYWORD:
+        return "FLOAT";
+    case Token::BREAK_KEYWORD:
+        return "BREAK";
+    case Token::CONTINUE_KEYWORD:
+        return "CONTINUE";
+    case Token::TWO_POINTS:
+        return "TWO POINTS";
+    case Token::QUESTION_MARK:
+        return "QUESTION MARK";
+    case Token::LEFT_SQBK:
+        return "LEFT SQUARE BRACKET";
+    case Token::RIGHT_SQBK:
+        return "RIGHT SQUARE BRACKET";
     default:
         return "UNKNOWN_TOKEN";
     }

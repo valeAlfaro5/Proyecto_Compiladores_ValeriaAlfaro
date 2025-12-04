@@ -18,6 +18,7 @@ class Parser {
         void whileStmt();
         void printStmt();
         void block();
+        void ternary();
         void expression();
         void logicalOr();
         void logicalAnd();
